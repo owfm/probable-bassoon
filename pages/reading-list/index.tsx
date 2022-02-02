@@ -1,9 +1,3 @@
-import remarkHtml from "remark-html"
-import remarkParse from "remark-parse"
-import styled from "styled-components"
-import { read } from "to-vfile"
-import { unified } from "unified"
-
 import App from "../../components/App"
 import getContentFromPath from "../../lib/getContentFromPath"
 import markdownToHtml from "../../lib/markdownToHtml"
@@ -17,9 +11,9 @@ const ReadingList: React.FC<Props> = ({ builtOn, html }) => {
         <App title={"Ollie Mansell | Reading List"} builtOn={builtOn}>
             <h1>Reading List</h1>
 
-            <Main
+            <article className='prose prose-slate'
                 dangerouslySetInnerHTML={{ __html: html }}
-            ></Main>
+            ></article>
         </App>)
 }
 
@@ -38,6 +32,3 @@ export const getStaticProps = async () => {
     }
 }
 
-const Main = styled.main`
-    color: var(--text);
-`
