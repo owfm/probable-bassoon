@@ -1,0 +1,39 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html,
+  body {
+    @apply h-full w-full;
+  }
+  #__next {
+    @apply flex min-h-full min-w-full flex-col bg-neutral-200 dark:bg-neutral-800;
+  }
+
+  aside {
+    @apply bg-neutral-200 dark:bg-neutral-800;
+  }
+  p,
+  a,
+  ul,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  span {
+    @apply tracking-tight text-neutral-800 dark:text-neutral-200;
+  }
+
+  h1 {
+    @apply inline-block text-2xl font-extrabold tracking-tight  sm:text-3xl;
+  }
+  h2 {
+    @apply inline-block text-xl font-extrabold tracking-tight  sm:text-2xl;
+  }
+  h3 {
+    @apply inline-block text-lg font-extrabold tracking-tight  sm:text-xl;
+  }
+}

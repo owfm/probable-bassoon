@@ -1,82 +1,54 @@
-import Head from 'next/head'
+import type { NextPage } from "next"
+import Link from "next/link"
 
-export default function Home() {
+import App from "../components/App/App"
+import { useRotatingInterests } from "../lib/useRotatingInterests"
+
+interface Props {
+  builtOn: Date;
+}
+
+const Home: NextPage<Props> = ({ builtOn }) => {
+
+  const interest = useRotatingInterests()
+
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center py-2">
-      <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+    <App title={"Ollie Mansell"} builtOn={builtOn}>
+      <article className='prose prose-slate'>
 
-      <main className="flex w-full flex-1 flex-col items-center justify-center px-20 text-center">
-        <h1 className="text-6xl font-bold">
-          Welcome to{' '}
-          <a className="text-blue-600" href="https://nextjs.org">
-            Next.js!
-          </a>
-        </h1>
+        <h1 className='dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-r dark:from-pink-600 dark:to-yellow-400 text-transparent bg-clip-text bg-gradient-to-r from-pink-600 to-yellow-400'>Ollie Mansell</h1>
+        <p>👋 Hi! Welcome. I'm a developer currently working with <span className='font-bold'>{`${interest}`}.</span></p>
+        <p>This is where I maintain a list of what I'm reading, work projects I've been involved with, my CV, and—one day—write some blog posts</p>
+        <h2>Now</h2>
+        <p>Software Engineer at <strong>StoneX.</strong>{" "}<span><Link href={"/developer-experience"}>See developer experience</Link></span></p>
 
-        <p className="mt-3 text-2xl">
-          Get started by editing{' '}
-          <code className="rounded-md bg-gray-100 p-3 font-mono text-lg">
-            pages/index.tsx
-          </code>
-        </p>
+        <h2>Before</h2>
+        <p>Award-winning physics teacher, coffee chemist, and technical safety and risk engineer (nuclear, oil and gas) <span><Link href={"/developer-experience"}>See work history</Link></span></p>
+        <h2>Education</h2>
+        <p>Masters degree in physics and astronomy <span><Link href={"/education"}>See education</Link></span></p>
 
-        <div className="mt-6 flex max-w-4xl flex-wrap items-center justify-around sm:w-full">
-          <a
-            href="https://nextjs.org/docs"
-            className="mt-6 w-96 rounded-xl border p-6 text-left hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Documentation &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Find in-depth information about Next.js features and API.
-            </p>
-          </a>
+        <h2>Currently Reading <small><span><Link href={"/reading-list"}>See reading list</Link></span></small></h2>
 
-          <a
-            href="https://nextjs.org/learn"
-            className="mt-6 w-96 rounded-xl border p-6 text-left hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Learn &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Learn about Next.js in an interactive course with quizzes!
-            </p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/canary/examples"
-            className="mt-6 w-96 rounded-xl border p-6 text-left hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Examples &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Discover and deploy boilerplate example Next.js projects.
-            </p>
-          </a>
-
-          <a
-            href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className="mt-6 w-96 rounded-xl border p-6 text-left hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Deploy &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
-        </div>
-      </main>
-
-      <footer className="flex h-24 w-full items-center justify-center border-t">
-        <a
-          className="flex items-center justify-center"
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className="ml-2 h-4" />
-        </a>
-      </footer>
-    </div>
+        <ul>
+          <li>Paul Beatty - <em>The Sellout</em></li>
+          <li>Michael J Sandel - <em>{`What's the right thing to do?`}</em></li>
+          <li>Designing Data Intensive Applications - <em>Martin Kleppmann</em></li>
+        </ul>
+      </article>
+    </App >
   )
 }
+
+export default Home
+
+export const getStaticProps = async () => {
+  return {
+    props: {
+      builtOn: new Date().toISOString()
+    }
+
+  }
+}
+
+
+
